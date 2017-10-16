@@ -1,0 +1,37 @@
+{
+  "name": "react-iframe",
+  "version": "1.0.0",
+  "description": "Rendering components inside iframes using react portal",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack -w --progress",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iphong/react-iframe.git"
+  },
+  "keywords": [
+    "react",
+    "iframe",
+    "component"
+  ],
+  "author": "Phong Vu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iphong/react-iframe/issues"
+  },
+  "homepage": "https://github.com/iphong/react-iframe#readme",
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "webpack": "^3.7.1"
+  }
+}
