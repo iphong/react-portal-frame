@@ -4,21 +4,26 @@ module.exports = [
 	{
 		devtool: 'source-map',
 		entry: {
-			index: './demo/index.js'
+			index: './src/frame.js'
 		},
 		output: {
-			path: path.resolve(__dirname, './demo'),
-			filename: '[name].bundle.js',
-			libraryTarget: 'umd'
+			path: path.resolve(__dirname, './dist'),
+			filename: '[name].js',
+			libraryTarget: 'commonjs'
 		},
 		module: {
 			rules: [
 				{
 					test: /\.js$/,
 					exclude: [/node_modules/],
-					use: 'babel-loader?cacheDirectory'
+					use: 'babel-loader?compact&cacheDirectory'
 				}
 			]
+		},
+		externals: {
+			react: 'react',
+			'react-dom': 'react-dom',
+			'prop-types': 'prop-types'
 		},
 		plugins: [],
 		watchOptions: {
