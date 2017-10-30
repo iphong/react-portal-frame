@@ -1,13 +1,14 @@
-import Types from 'prop-types'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import events from './events'
+const Types = require('prop-types')
+const React = require('react')
+const ReactDOM = require('react-dom')
+const events = require('./events')
 
 const noop = () => {}
 const EVENTS = {}
+
 events.forEach(e => (EVENTS[e] = noop))
 
-export default class Frame extends React.PureComponent {
+module.exports = class Frame extends React.PureComponent {
 	static propTypes = {
 		children: Types.any,
 		style: Types.object,
