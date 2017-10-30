@@ -1,15 +1,15 @@
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = [
 	{
 		// devtool: 'source-map',
-		entry: {
-			index: './src/frame.js'
-		},
+		entry: './src/frame.js',
 		output: {
 			path: path.resolve(__dirname, './dist'),
-			filename: '[name].js',
-			libraryTarget: 'commonjs'
+			filename: 'index.js',
+			libraryTarget: 'umd',
+			umdNamedDefine: true
 		},
 		module: {
 			rules: [
@@ -25,7 +25,20 @@ module.exports = [
 			'react-dom': 'react-dom',
 			'prop-types': 'prop-types'
 		},
-		plugins: [],
+		plugins: [
+			new webpack.optimize.UglifyJsPlugin({
+				mangle: true,
+				minimize: true,
+				comments: false,
+				compress: {
+					screw_ie8: true,
+					warnings: false,
+					drop_console: true,
+					dead_code: true,
+					unused: true
+				}
+			})
+		],
 		watchOptions: {
 			ignored: [/node_modules/]
 		}
