@@ -2,28 +2,25 @@ import Types from 'prop-types'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-class Frame extends React.Component {
+class UIFrame extends React.Component {
 	static propTypes = {
 		children: Types.any,
 		style: Types.object,
 		onLoad: Types.func
 	}
-	static childContextTypes = {
-		frame: Types.element,
-		window: Types.element,
-		document: Types.element
-	}
-	getChildContext() {
-		const self = this
-		return {
-			frame: this.frame,
-			window: this.window,
-			document: this.document
-		}
-	}
 	componentWillMount() {
 		this.el = document.createElement('div')
-		this.onLoad = this.onLoad.bind(this)
+		this.setState({ loaded: false })
+	}
+	componentDidMount() {
+		this.frame.addEventListener('load', e => {
+			this.document.body.appendChild(this.el)
+			if (typeof this.props.onLoad === 'function')
+				this.props.onLoad(e, this)
+			this.setState({
+				loaded: true
+			})
+		})
 	}
 	get document() {
 		return this.frame ? this.frame.contentDocument : void 0
@@ -31,25 +28,24 @@ class Frame extends React.Component {
 	get window() {
 		return this.frame ? this.frame.contentWindow : void 0
 	}
-	onLoad(e) {
-		console.log('loaded')
-		this.document.body.appendChild(this.el)
-		if (typeof this.props.onLoad === 'function')
-			this.props.onLoad(e, this)
-	}
 	render() {
 		return (
 			<iframe
+				{...this.props}
 				ref={ref => (this.frame = ref)}
 				srcDoc={`<!DOCTYPE html>`}
-				onLoad={this.onLoad}
 				style={{
 					border: 0,
+					border: 0,
 					width: '100%',
+					height: '100%',
 					...this.props.style
 				}}
 			>
-				{ReactDOM.createPortal(this.props.children, this.el)}
+				{ReactDOM.createPortal(
+					this.state.loaded ? this.props.children : null,
+					this.el
+				)}
 			</iframe>
 		)
 	}
@@ -62,7 +58,7 @@ class Child extends React.Component {
 	render() {
 		return (
 			<div>
-				<button>
+				<button onClickCapture={e => console.log('click button')}>
 					{this.context.foo}
 				</button>
 			</div>
@@ -81,12 +77,12 @@ class Parent extends React.Component {
 	}
 	render() {
 		return (
-			<div onClick={e => console.log('click')}>
-				<h3>Testing</h3>
-				<Frame>
-					<h3 onClick={e => console.log('click button')}>This is frame content</h3>
-					<Child />
-				</Frame>
+			<div>
+				<h3 onClick={e => console.log('click button')}>Testing</h3>
+				<UIFrame onClick={e => console.log('click button')}>
+					<h3>This is frame content</h3>
+					<Child onClick={e => console.log('click button')} />
+				</UIFrame>
 			</div>
 		)
 	}
