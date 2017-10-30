@@ -1,13 +1,14 @@
 const path = require('path')
+
 module.exports = [
 	{
 		devtool: 'source-map',
 		entry: {
-			index: './index.js',
+			index: './demo/index.js'
 		},
 		output: {
-			path: path.resolve(__dirname, './dist'),
-			filename: '[name].js',
+			path: path.resolve(__dirname, './demo'),
+			filename: '[name].bundle.js',
 			libraryTarget: 'umd'
 		},
 		module: {
@@ -21,7 +22,7 @@ module.exports = [
 		},
 		plugins: [],
 		watchOptions: {
-			ignored: [/node_modules|dist/]
+			ignored: [/node_modules/]
 		}
 	}
 ]
