@@ -77,6 +77,7 @@ const EVENTS = [
 ].reduce((m, e) => {
 	m[`on${e}`] = noop
 	if (e !== 'MouseEnter' && e !== 'MouseLeave') m[`on${e}Capture`] = noop
+	return m
 }, {})
 
 module.exports = class extends React.PureComponent {
