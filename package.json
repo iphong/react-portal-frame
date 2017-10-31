@@ -1,6 +1,6 @@
 {
   "name": "react-portal-frame",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Rendering components inside iframes using react portal",
   "main": "dist/index.js",
   "scripts": {
