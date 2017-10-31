@@ -1,5 +1,5 @@
 {
-  "name": "react-iframe",
+  "name": "react-portal-frame",
   "version": "1.0.0",
   "description": "Rendering components inside iframes using react portal",
   "main": "dist/index.js",
@@ -9,19 +9,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iphong/react-iframe.git"
+    "url": "git+https://github.com/iphong/react-portal-frame.git"
   },
   "keywords": [
     "react",
+    "portal",
     "iframe",
     "component"
   ],
   "author": "Phong Vu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iphong/react-iframe/issues"
+    "url": "https://github.com/iphong/react-portal-frame/issues"
   },
-  "homepage": "https://github.com/iphong/react-iframe#readme",
+  "homepage": "https://github.com/iphong/react-portal-frame#readme",
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0"

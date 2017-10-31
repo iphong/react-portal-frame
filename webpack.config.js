@@ -3,13 +3,12 @@ const webpack = require('webpack')
 
 module.exports = [
 	{
-		// devtool: 'source-map',
-		entry: './src/frame.js',
+		devtool: 'source-map',
+		entry: './src/index.js',
 		output: {
 			path: path.resolve(__dirname, './dist'),
 			filename: 'index.js',
-			libraryTarget: 'umd',
-			umdNamedDefine: true
+			libraryTarget: 'umd'
 		},
 		module: {
 			rules: [
@@ -38,9 +37,6 @@ module.exports = [
 					unused: true
 				}
 			})
-		],
-		watchOptions: {
-			ignored: [/node_modules/]
-		}
+		]
 	}
 ]
