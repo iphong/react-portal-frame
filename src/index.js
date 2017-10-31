@@ -1,13 +1,85 @@
-import Types from 'prop-types'
-import React, { PureComponent } from 'react'
-import ReactDOM from 'react-dom'
-import events from './events'
+const React = require('react')
+const ReactDOM = require('react-dom')
+const Types = require('prop-types')
 
 const noop = () => {}
-const EVENTS = {}
-events.forEach(e => (EVENTS[e] = noop))
+const EVENTS = [
+	'Copy',
+	'Cut',
+	'Paste',
+	'CompositionEnd',
+	'CompositionStart',
+	'CompositionUpdate',
+	'KeyDown',
+	'KeyPress',
+	'KeyUp',
+	'Focus',
+	'Blur',
+	'Change',
+	'Input',
+	'Invalid',
+	'Submit',
+	'Click',
+	'ContextMenu',
+	'DoubleClick',
+	'Drag',
+	'DragEnd',
+	'DragEnter',
+	'DragExit',
+	'DragLeave',
+	'DragOver',
+	'DragStart',
+	'Drop',
+	'MouseDown',
+	'MouseEnter',
+	'MouseLeave',
+	'MouseMove',
+	'MouseOut',
+	'MouseOver',
+	'MouseUp',
+	'Select',
+	'TouchCancel',
+	'TouchEnd',
+	'TouchMove',
+	'TouchStart',
+	'Scroll',
+	'Wheel',
+	'Abort',
+	'CanPlay',
+	'CanPlayThrough',
+	'DurationChange',
+	'Emptied',
+	'Encrypted',
+	'Ended',
+	'Error',
+	'LoadedData',
+	'LoadedMetadata',
+	'LoadStart',
+	'Pause',
+	'Play',
+	'Playing',
+	'Progress',
+	'RateChange',
+	'Seeked',
+	'Seeking',
+	'Stalled',
+	'Suspend',
+	'TimeUpdate',
+	'VolumeChange',
+	'Waiting',
+	'Load',
+	'Error',
+	'AnimationStart',
+	'AnimationEnd',
+	'AnimationIteration',
+	'TransitionEnd',
+	'Toggle'
+].reduce((m, e) => {
+	m[`on${e}`] = noop
+	if (e !== 'MouseEnter' && e !== 'MouseLeave') m[`on${e}Capture`] = noop
+}, {})
 
-export default class PortalFrame extends PureComponent {
+module.exports = class extends React.PureComponent {
 	static displayName = 'PortalFrame'
 	static propTypes = {
 		children: Types.any,
