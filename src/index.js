@@ -1,5 +1,5 @@
 import Types from 'prop-types'
-import React from 'react'
+import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import events from './events'
 
@@ -7,7 +7,8 @@ const noop = () => {}
 const EVENTS = {}
 events.forEach(e => (EVENTS[e] = noop))
 
-export default class Frame extends React.PureComponent {
+export default class PortalFrame extends PureComponent {
+	static displayName = 'PortalFrame'
 	static propTypes = {
 		children: Types.any,
 		style: Types.object,
