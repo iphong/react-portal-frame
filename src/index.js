@@ -99,10 +99,11 @@ module.exports = class extends React.PureComponent {
 			document: this.document
 		}
 	}
-	componentWillMount() {
+	constructor() {
+		super()
 		this.handleLoad = this.handleLoad.bind(this)
 		this.el = document.createElement('div')
-		this.setState({ loaded: false })
+		this.state = { loaded: false }
 	}
 	componentDidMount() {
 		this.frame.addEventListener('load', this.handleLoad, true)
@@ -131,7 +132,6 @@ module.exports = class extends React.PureComponent {
 				ref={el => (this.frame = el)}
 				srcDoc={`<!DOCTYPE html>`}
 				style={{
-					border: 0,
 					border: 0,
 					width: '100%',
 					...this.props.style

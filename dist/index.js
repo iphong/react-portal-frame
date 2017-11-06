@@ -1,1 +1,117 @@
-!function(e,t){if("object"==typeof exports&&"object"==typeof module)module.exports=t(require("react"),require("react-dom"),require("prop-types"));else if("function"==typeof define&&define.amd)define(["react","react-dom","prop-types"],t);else{var n="object"==typeof exports?t(require("react"),require("react-dom"),require("prop-types")):t(e.react,e["react-dom"],e["prop-types"]);for(var o in n)("object"==typeof exports?exports:e)[o]=n[o]}}(this,function(e,t,n){return function(e){function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};return t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=0)}([function(e,t,n){"use strict";function o(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function a(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function i(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var u,c,s=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var o in n)Object.prototype.hasOwnProperty.call(n,o)&&(e[o]=n[o])}return e},l=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),p=n(1),d=n(2),f=n(3),h=function(){},m=["Copy","Cut","Paste","CompositionEnd","CompositionStart","CompositionUpdate","KeyDown","KeyPress","KeyUp","Focus","Blur","Change","Input","Invalid","Submit","Click","ContextMenu","DoubleClick","Drag","DragEnd","DragEnter","DragExit","DragLeave","DragOver","DragStart","Drop","MouseDown","MouseEnter","MouseLeave","MouseMove","MouseOut","MouseOver","MouseUp","Select","TouchCancel","TouchEnd","TouchMove","TouchStart","Scroll","Wheel","Abort","CanPlay","CanPlayThrough","DurationChange","Emptied","Encrypted","Ended","Error","LoadedData","LoadedMetadata","LoadStart","Pause","Play","Playing","Progress","RateChange","Seeked","Seeking","Stalled","Suspend","TimeUpdate","VolumeChange","Waiting","Load","Error","AnimationStart","AnimationEnd","AnimationIteration","TransitionEnd","Toggle"].reduce(function(e,t){return e["on"+t]=h,"MouseEnter"!==t&&"MouseLeave"!==t&&(e["on"+t+"Capture"]=h),e},{});e.exports=(c=u=function(e){function t(){return r(this,t),a(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return i(t,e),l(t,[{key:"getChildContext",value:function(){return{frame:this.frame,window:this.window,document:this.document}}},{key:"componentWillMount",value:function(){this.handleLoad=this.handleLoad.bind(this),this.el=document.createElement("div"),this.setState({loaded:!1})}},{key:"componentDidMount",value:function(){this.frame.addEventListener("load",this.handleLoad,!0)}},{key:"componentWillUnmount",value:function(){this.frame.removeEventListener("load",this.handleLoad,!0),delete this.frame,delete this.el}},{key:"handleLoad",value:function(){this.document.head.innerHTML=this.props.head||"";var e=this.frame.contentDocument.querySelector("html");this.frame.contentDocument.body.remove(),this.setState({root:e})}},{key:"render",value:function(){var e,t=this;return p.createElement("iframe",s({},this.props,{ref:function(e){return t.frame=e},srcDoc:"<!DOCTYPE html>",style:s((e={border:0},o(e,"border",0),o(e,"width","100%"),e),this.props.style)}),this.state.root?d.createPortal(p.createElement("body",m,this.props.children),this.state.root):null)}},{key:"document",get:function(){return this.frame?this.frame.contentDocument:void 0}},{key:"window",get:function(){return this.frame?this.frame.contentWindow:void 0}}]),t}(p.PureComponent),u.displayName="PortalFrame",u.propTypes={children:f.any,style:f.object,head:f.any},u.childContextTypes={frame:f.any,window:f.any,document:f.any},c)},function(t,n){t.exports=e},function(e,n){e.exports=t},function(e,t){e.exports=n}])});
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class;
+var _temp;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+var Types = require('prop-types');
+
+var noop = function noop() {};
+var EVENTS = ['Copy', 'Cut', 'Paste', 'CompositionEnd', 'CompositionStart', 'CompositionUpdate', 'KeyDown', 'KeyPress', 'KeyUp', 'Focus', 'Blur', 'Change', 'Input', 'Invalid', 'Submit', 'Click', 'ContextMenu', 'DoubleClick', 'Drag', 'DragEnd', 'DragEnter', 'DragExit', 'DragLeave', 'DragOver', 'DragStart', 'Drop', 'MouseDown', 'MouseEnter', 'MouseLeave', 'MouseMove', 'MouseOut', 'MouseOver', 'MouseUp', 'Select', 'TouchCancel', 'TouchEnd', 'TouchMove', 'TouchStart', 'Scroll', 'Wheel', 'Abort', 'CanPlay', 'CanPlayThrough', 'DurationChange', 'Emptied', 'Encrypted', 'Ended', 'Error', 'LoadedData', 'LoadedMetadata', 'LoadStart', 'Pause', 'Play', 'Playing', 'Progress', 'RateChange', 'Seeked', 'Seeking', 'Stalled', 'Suspend', 'TimeUpdate', 'VolumeChange', 'Waiting', 'Load', 'Error', 'AnimationStart', 'AnimationEnd', 'AnimationIteration', 'TransitionEnd', 'Toggle'].reduce(function (m, e) {
+	m['on' + e] = noop;
+	if (e !== 'MouseEnter' && e !== 'MouseLeave') m['on' + e + 'Capture'] = noop;
+	return m;
+}, {});
+
+module.exports = (_temp = _class = function (_React$PureComponent) {
+	_inherits(_class, _React$PureComponent);
+
+	_createClass(_class, [{
+		key: 'getChildContext',
+		value: function getChildContext() {
+			return {
+				frame: this.frame,
+				window: this.window,
+				document: this.document
+			};
+		}
+	}]);
+
+	function _class() {
+		_classCallCheck(this, _class);
+
+		var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this));
+
+		_this.handleLoad = _this.handleLoad.bind(_this);
+		_this.el = document.createElement('div');
+		_this.state = { loaded: false };
+		return _this;
+	}
+
+	_createClass(_class, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.frame.addEventListener('load', this.handleLoad, true);
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			this.frame.removeEventListener('load', this.handleLoad, true);
+			delete this.frame;
+			delete this.el;
+		}
+	}, {
+		key: 'handleLoad',
+		value: function handleLoad() {
+			this.document.head.innerHTML = this.props.head || '';
+			var root = this.frame.contentDocument.querySelector('html');
+			this.frame.contentDocument.body.remove();
+			this.setState({ root: root });
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			return React.createElement(
+				'iframe',
+				_extends({}, this.props, {
+					ref: function ref(el) {
+						return _this2.frame = el;
+					},
+					srcDoc: '<!DOCTYPE html>',
+					style: _extends({
+						border: 0,
+						width: '100%'
+					}, this.props.style)
+				}),
+				this.state.root ? ReactDOM.createPortal(React.createElement(
+					'body',
+					EVENTS,
+					this.props.children
+				), this.state.root) : null
+			);
+		}
+	}, {
+		key: 'document',
+		get: function get() {
+			return this.frame ? this.frame.contentDocument : void 0;
+		}
+	}, {
+		key: 'window',
+		get: function get() {
+			return this.frame ? this.frame.contentWindow : void 0;
+		}
+	}]);
+
+	return _class;
+}(React.PureComponent), _class.displayName = 'PortalFrame', _class.propTypes = {
+	children: Types.any,
+	style: Types.object,
+	head: Types.any
+}, _class.childContextTypes = {
+	frame: Types.any,
+	window: Types.any,
+	document: Types.any
+}, _temp);
