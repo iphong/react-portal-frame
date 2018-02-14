@@ -116,7 +116,11 @@ module.exports = class extends React.PureComponent {
 	handleLoad() {
 		this.document.head.innerHTML = this.props.head || ''
 		const root = this.frame.contentDocument.querySelector('html')
-		this.frame.contentDocument.body.remove()
+		if (this.frame.contentDocument.body.hasOwnProperty('remove')) {
+			this.frame.contentDocument.body.remove()
+		} else {
+			this.frame.contentDocument.body.parentNode.removeChild(this.frame.contentDocument.body)
+		}
 		this.setState({ root })
 	}
 	get document() {
