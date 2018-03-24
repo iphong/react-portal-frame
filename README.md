@@ -24,7 +24,7 @@ import PortalFrame from 'react-portal-frame'
 
 class MyComponent extends React.Component {
   handleClick = e => {
-    console.log(e.target)
+    console.log(e.target, e.target.ownerDocument.defaultView.frameElement)
   }
   render() {
     return <div onClick={this.handleClick}>
