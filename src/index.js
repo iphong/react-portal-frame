@@ -1,6 +1,8 @@
+/* hello */
 const React = require('react')
 const ReactDOM = require('react-dom')
 const Types = require('prop-types')
+const { StyleSheetManager } = require('styled-components')
 
 const noop = () => {}
 const EVENTS = [
@@ -80,12 +82,13 @@ const EVENTS = [
 	return m
 }, {})
 
-module.exports = class extends React.PureComponent {
+export default class UIFrame extends React.PureComponent {
 	static displayName = 'PortalFrame'
 	static propTypes = {
-		children: Types.any,
 		style: Types.object,
-		head: Types.any
+		head: Types.string,
+		frameDidLoad: Types.func,
+		children: Types.oneOfType([Types.func, Types.node])
 	}
 	static childContextTypes = {
 		frame: Types.any,
@@ -99,53 +102,56 @@ module.exports = class extends React.PureComponent {
 			document: this.document
 		}
 	}
-	constructor() {
-		super()
-		this.handleLoad = this.handleLoad.bind(this)
-		this.el = document.createElement('div')
-		this.state = { loaded: false }
-	}
+	state = { loaded: false }
+	handleLoad = this._handleLoad.bind(this)
+
 	componentDidMount() {
 		this.frame.addEventListener('load', this.handleLoad, true)
 	}
 	componentWillUnmount() {
 		this.frame.removeEventListener('load', this.handleLoad, true)
 		delete this.frame
-		delete this.el
 	}
-	handleLoad() {
-		this.document.head.innerHTML = this.props.head || ''
+	_handleLoad(e) {
 		const root = this.frame.contentDocument.querySelector('html')
-		if (this.frame.contentDocument.body.hasOwnProperty('remove')) {
-			this.frame.contentDocument.body.remove()
-		} else {
-			this.frame.contentDocument.body.parentNode.removeChild(this.frame.contentDocument.body)
-		}
-		this.setState({ root })
+		this.frame.contentDocument.body.remove()
+		this.setState({ root, loaded: true }, () => {
+			if (this.props.frameDidLoad) {
+				this.props.frameDidLoad()
+			}
+		})
 	}
 	get document() {
-		return this.frame ? this.frame.contentDocument : void 0
+		return this.frame ? this.frame.contentDocument : undefined
 	}
 	get window() {
-		return this.frame ? this.frame.contentWindow : void 0
+		return this.frame ? this.frame.contentWindow : undefined
 	}
 	render() {
+		// eslint-disable-next-line no-unused-vars
+		const { frameDidLoad, children, ...restProps } = this.props
 		return (
 			<iframe
-				{...this.props}
+				{...restProps}
 				ref={el => (this.frame = el)}
-				srcDoc={`<!DOCTYPE html>`}
+				name="React Portal Frame"
+				srcDoc={`<!DOCTYPE html><html><head>${this.props.head ||
+					''}</head></html>`}
 				style={{
 					border: 0,
 					width: '100%',
 					...this.props.style
 				}}
 			>
-				{this.state.root
+				{this.state.loaded && this.state.root
 					? ReactDOM.createPortal(
-							<body {...EVENTS}>
-								{this.props.children}
-							</body>,
+							<StyleSheetManager
+								target={this.frame.contentDocument.head}
+							>
+								<body {...EVENTS}>
+									{' '}{children}
+								</body>
+							</StyleSheetManager>,
 							this.state.root
 						)
 					: null}
