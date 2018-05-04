@@ -3,7 +3,7 @@ Rendering components inside iframes using react portal.
 
 ## Basic Usage
 
-```js
+```jsx harmony
 import PortalFrame from 'react-portal-frame'
 
 const MyComponent = props => {
@@ -19,7 +19,7 @@ const MyComponent = props => {
 
 One unique feature of this component is that it fully supports react synthetic event bubbling & capturing. It means that you can capture events inside iframe from parent containers.
 
-```js
+```jsx harmony
 import PortalFrame from 'react-portal-frame'
 
 class MyComponent extends React.Component {
@@ -44,7 +44,7 @@ class MyComponent extends React.Component {
 
 React Portal Frame is fully aware of styled-components, so your components render within iframe can be beautifully styled and this is done automatically so you don't have to do anything.   
 
-```js
+```jsx harmony
 import PortalFrame from 'react-portal-frame'
 import styled from 'styled-component'
 
